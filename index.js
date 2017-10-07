@@ -1,5 +1,5 @@
 import {NativeModules} from 'react-native';
 
-const {Omise} = NativeModules;
+const {OmiseModule} = NativeModules;
 
-export default Omise;
+export default OmiseModule;
