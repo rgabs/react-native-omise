@@ -3,8 +3,15 @@
     package="com.rgabs.omise">
 
     <application>
-        <activity android:name=".Omise">
-        </activity>
+        <activity android:name=".Omise"></activity>
+        <activity android:name=".CreditCardInput"></activity>
+        <activity
+            android:name="co.omise.android.ui.CreditCardActivity"
+            android:theme="@style/OmiseSDKTheme" />
+        <activity
+            android:name="com.rgabs.omise.CreditCardActivity"
+            android:theme="@style/OmiseSDKTheme" />
     </application>
+
 
 </manifest>

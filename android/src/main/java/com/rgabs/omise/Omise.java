@@ -1,4 +1,6 @@
 package com.rgabs.omise;
+import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 
 import co.omise.android.Client;
@@ -6,14 +8,11 @@ import co.omise.android.TokenRequestListener;
 import co.omise.android.TokenRequest;
 import co.omise.android.models.Token;
 
-import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
-
-import org.json.JSONObject;
 
 /**
  * Created by rahulgaba on 10/8/17.
@@ -21,7 +20,8 @@ import org.json.JSONObject;
 
 
 public class Omise extends ReactContextBaseJavaModule {
-
+    public static Promise promiseInst;
+    public static String PUB_KEY;
     public Omise(ReactApplicationContext reactContext) {
         super(reactContext);
     }
@@ -29,11 +29,11 @@ public class Omise extends ReactContextBaseJavaModule {
     public String getName() {
         return "OmiseModule";
     }
+
     @ReactMethod
     public void getToken(String pubKey, ReadableMap creditCard, final Promise promise) {
         TokenRequest request = new TokenRequest();
         try {
-//            Client client = new Client("pkey_test_59hv29c33aajtz65mgo");
             Client client = new Client(pubKey);
             request.number = String.valueOf(creditCard.getString("number"));
             request.name = String.valueOf(creditCard.getString("name"));
@@ -58,4 +58,16 @@ public class Omise extends ReactContextBaseJavaModule {
             promise.reject(e);
         }
     }
+    @ReactMethod
+    public void setKey (String key) {
+        PUB_KEY = key;
+    }
+    @ReactMethod
+    private void showCreditCardForm(Promise promise) {
+        promiseInst = promise;
+        Activity mActivity = getCurrentActivity();
+        Intent intent = new Intent(mActivity, CreditCardInput.class);
+        mActivity.startActivity(intent);
+    }
+
 }

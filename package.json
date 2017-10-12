@@ -1,6 +1,6 @@
 {
   "name": "react-native-omise",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "[WIP]React Native bindings for Omise",
   "main": "index.js",
   "repository": {
